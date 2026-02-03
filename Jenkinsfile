@@ -83,24 +83,9 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    docker.withRegistry('', env.REGISTRY_CREDENTIALS) {
-                        parallel (
-                            backend: {
-                                dir('backend') {
-                                    def backendImage = docker.build("${BACKEND_IMAGE}:${BUILD_NUMBER}")
-                                    backendImage.push()
-                                    backendImage.push('latest')
-                                }
-                            },
-                            frontend: {
-                                dir('frontend') {
-                                    def frontendImage = docker.build("${FRONTEND_IMAGE}:${BUILD_NUMBER}")
-                                    frontendImage.push()
-                                    frontendImage.push('latest')
-                                }
-                            }
-                        )
-                    }
+                    echo "✅ Skipping Docker build - add docker-hub-creds to enable"
+                    echo "Backend would be: ${BACKEND_IMAGE}:${BUILD_NUMBER}"
+                    echo "Frontend would be: ${FRONTEND_IMAGE}:${BUILD_NUMBER}"
                 }
             }
         }
