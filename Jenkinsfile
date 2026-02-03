@@ -9,6 +9,7 @@ pipeline {
         DOCKER_REGISTRY = 'docker.io/lasmor2025'
         REGISTRY_CREDENTIALS = credentials('docker-hub-creds')
         GITHUB_CREDENTIALS = credentials('github-token')
+        MONGODB_URI = credentials('mongodb-uri')
         BACKEND_IMAGE = "${DOCKER_REGISTRY}/backend"
         FRONTEND_IMAGE = "${DOCKER_REGISTRY}/frontend"
         GITHUB_REPO = 'lasmor2/jenkins-ci-cd'
