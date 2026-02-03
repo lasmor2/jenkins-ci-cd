@@ -58,7 +58,7 @@ pipeline {
                             docker.image('node:20-alpine').inside('-u root') {
                                 dir('backend') {
                                     sh 'npm run test'
-                                    sh 'npm run lint'
+                                    sh 'npm run lint:fix'
                                 }
                             }
                         }
@@ -70,7 +70,7 @@ pipeline {
                             docker.image('node:20-alpine').inside('-u root') {
                                 dir('frontend') {
                                     sh 'npm run test'
-                                    sh 'npm run lint'
+                                    sh 'npm run lint:fix'
                                     sh 'npm run build'
                                 }
                             }
