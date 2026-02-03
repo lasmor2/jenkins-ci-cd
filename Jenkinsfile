@@ -27,15 +27,23 @@ pipeline {
             parallel {
                 stage('Backend Dependencies') {
                     steps {
-                        dir('backend') {
-                            sh 'npm ci'
+                        script {
+                            docker.image('node:18-alpine').inside {
+                                dir('backend') {
+                                    sh 'npm ci'
+                                }
+                            }
                         }
                     }
                 }
                 stage('Frontend Dependencies') {
                     steps {
-                        dir('frontend') {
-                            sh 'npm ci'
+                        script {
+                            docker.image('node:18-alpine').inside {
+                                dir('frontend') {
+                                    sh 'npm ci'
+                                }
+                            }
                         }
                     }
                 }
@@ -46,18 +54,26 @@ pipeline {
             parallel {
                 stage('Backend Tests') {
                     steps {
-                        dir('backend') {
-                            sh 'npm run test'
-                            sh 'npm run lint'
+                        script {
+                            docker.image('node:18-alpine').inside {
+                                dir('backend') {
+                                    sh 'npm run test'
+                                    sh 'npm run lint'
+                                }
+                            }
                         }
                     }
                 }
                 stage('Frontend Build') {
                     steps {
-                        dir('frontend') {
-                            sh 'npm run test'
-                            sh 'npm run lint'
-                            sh 'npm run build'
+                        script {
+                            docker.image('node:18-alpine').inside {
+                                dir('frontend') {
+                                    sh 'npm run test'
+                                    sh 'npm run lint'
+                                    sh 'npm run build'
+                                }
+                            }
                         }
                     }
                 }
