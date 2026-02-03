@@ -28,9 +28,9 @@ pipeline {
                 stage('Backend Dependencies') {
                     steps {
                         script {
-                            docker.image('node:18-alpine').inside {
+                            docker.image('node:20-alpine').inside('-u root') {
                                 dir('backend') {
-                                    sh 'npm ci'
+                                    sh 'npm ci --cache /tmp/.npm'
                                 }
                             }
                         }
@@ -39,9 +39,9 @@ pipeline {
                 stage('Frontend Dependencies') {
                     steps {
                         script {
-                            docker.image('node:18-alpine').inside {
+                            docker.image('node:20-alpine').inside('-u root') {
                                 dir('frontend') {
-                                    sh 'npm ci'
+                                    sh 'npm ci --cache /tmp/.npm'
                                 }
                             }
                         }
@@ -55,7 +55,7 @@ pipeline {
                 stage('Backend Tests') {
                     steps {
                         script {
-                            docker.image('node:18-alpine').inside {
+                            docker.image('node:20-alpine').inside('-u root') {
                                 dir('backend') {
                                     sh 'npm run test'
                                     sh 'npm run lint'
@@ -67,7 +67,7 @@ pipeline {
                 stage('Frontend Build') {
                     steps {
                         script {
-                            docker.image('node:18-alpine').inside {
+                            docker.image('node:20-alpine').inside('-u root') {
                                 dir('frontend') {
                                     sh 'npm run test'
                                     sh 'npm run lint'
