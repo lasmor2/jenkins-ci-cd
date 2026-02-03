@@ -43,7 +43,7 @@ pipeline {
         GITHUB_CREDENTIALS = credentials('github-token')
         BACKEND_IMAGE = "${DOCKER_REGISTRY}/backend"
         FRONTEND_IMAGE = "${DOCKER_REGISTRY}/frontend"
-        GITHUB_REPO = 'lasmor2025/your-repo-name'
+        GITHUB_REPO = 'lasmor2/jenkins-ci-cd'
     }
     
     stages {
